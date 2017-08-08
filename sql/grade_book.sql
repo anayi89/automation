@@ -21,7 +21,7 @@ INSERT INTO student_grades (name, number_grade, fraction_completed)
 -- Create a column called 'percent_completed' by multiplying and rounding integers from 'fraction_completed'.
 SELECT name, number_grade, ROUND(fraction_completed * 100) AS percent_completed FROM student_grades;
 
--- Create a column called 'letter_grades' and grade students' grades by letter, such that A is above 90, B is 81 - 89, C is 71 - 79 and F = 70 and below.
+-- Create a column called 'letter_grades' and grade students' grades by letter, such that A is above 90, B is 81 - 89, C is 71 - 79 and F is 70 and below.
 SELECT COUNT(*),
     CASE
         WHEN number_grade > 90 THEN "A"
