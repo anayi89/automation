@@ -25,3 +25,11 @@ SELECT customers.name, customers.email, orders.item, orders.price
     FROM customers
     LEFT OUTER JOIN orders
     ON customers.id = orders.customer_id;
+
+-- Select the above, along with the total amount of money spent on orders and sort by the amount of money spent from most to least.
+SELECT customers.name, customers.email, SUM(orders.price)
+    FROM customers
+    LEFT OUTER JOIN orders
+    ON customers.id = orders.customer_id
+    GROUP BY customers.name
+    ORDER BY SUM(orders.price) DESC;
