@@ -31,3 +31,9 @@ INSERT INTO hobbies (person_id, name) VALUES (6, "slaying");
 SELECT persons.name, hobbies.name FROM persons
     JOIN hobbies
     ON persons.id = hobbies.person_id;
+
+-- Select the above, but only Banana FoFanna's hobbies.
+SELECT persons.name, hobbies.name FROM persons
+    JOIN hobbies
+    ON persons.id = hobbies.person_id
+    WHERE persons.name = "Banana FoFanna";
