@@ -27,7 +27,6 @@ INSERT INTO books (author, title, words)
     VALUES ("Stephenie Meyer", "Eclipse", 147930);
 INSERT INTO books (author, title, words)
     VALUES ("Stephenie Meyer", "Breaking Dawn", 192196);
-    
 INSERT INTO books (author, title, words)
     VALUES ("J.R.R. Tolkien", "The Hobbit", 95022);
 INSERT INTO books (author, title, words)
