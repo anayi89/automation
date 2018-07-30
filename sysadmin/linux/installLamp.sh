@@ -41,7 +41,7 @@ sudo echo "<VirtualHost *:80> \
                \n\t DocumentRoot /var/www/${webPageName}.local/public_html \
                \n\t ErrorLog ${APACHE_LOG_DIR}/error.log \
                \n\t CustomLog ${APACHE_LOG_DIR}/access.log combined \
-               \n <VirtualHost>" >> /etc/apache2/sites-available/${webPageName}.local.conf
+       \n <VirtualHost>" >> /etc/apache2/sites-available/${webPageName}.local.conf
 sudo echo "Enter an IP address to access your webpage"
 read ipAddress
 sudo echo "${ipAddress} ${webPageName}.local" >> /etc/hosts
