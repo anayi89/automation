@@ -1,29 +1,28 @@
-def main():
-  ip_address = input("Enter an IP address: ").split(".")
-  cidr = int(input("Enter a CIDR: "))
+ip_address = input("Enter an IP address: ").split(".")
+cidr = int(input("Enter a CIDR: "))
 
-  # Split the IP address by octets.
-  octet1 = ip_address[0]
-  octet2 = ip_address[1]
-  octet3 = ip_address[2]
-  octet4 = ip_address[3]
+# Split the IP address by octets.
+octet1 = ip_address[0]
+octet2 = ip_address[1]
+octet3 = ip_address[2]
+octet4 = ip_address[3]
 
-  # Verify that the user input are a valid IP address and CIDR.
-  while True:
-    try:
-      val1 = int(octet1)
-      val2 = int(octet2)
-      val3 = int(octet3)
-      val4 = int(octet4)
-      break
-    except ValueError:
-      print("The IP address is not valid.")
-    try:
-      val5 = int(cidr)
-      val5 > 0 and val5 <= 32
-      break
-    except ValueError:
-      print("The CIDR must be between 1 and 32.")
+# Verify that the user input are a valid IP address and CIDR.
+while True:
+  try:
+    val1 = int(octet1)
+    val2 = int(octet2)
+    val3 = int(octet3)
+    val4 = int(octet4)
+    break
+  except ValueError:
+    print("The IP address is not valid.")
+  try:
+    val5 = int(cidr)
+    val5 > 0 and val5 <= 32
+    break
+  except ValueError:
+    print("The CIDR must be between 1 and 32.")
 
 # Calculate the IP address range by class.
 def classA():
@@ -66,8 +65,6 @@ def classC():
   print('Network Address: {0}.{1}.{2}.{3}'.format(octet1,octet2,octet3,network_address))
   print('Host Address Range: {0}.{1}.{2}.{3} - {0}.{1}.{2}.{4}'.format(octet1,octet2,octet3,first_address,last_address))
   print('Broadcast Address: {0}.{1}.{2}.{3}'.format(octet1,octet2,octet3,broadcast_address))
-
-main()
 
 if cidr >= 1 and cidr <= 16:
   classA()
