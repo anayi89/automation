@@ -2,7 +2,6 @@ package saucedemopackage;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,120 +15,86 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class firstTestCase {
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class FirstTestCase {
 	WebDriver driver = null;
-	
-	String test_url = "https://www.saucedemo.com";
-	
-	String valid_user = "standard_user";
-	String valid_pass = "secret_sauce";
-	String invalid_user = "user";
-	String invalid_pass = "sauce";
-		
+
+	String testUrl = "https://www.saucedemo.com";
+	String urlString = "https://www.saucedemo.com/inventory.html";
+	String validUser = "standard_user";
+	String validPass = "secret_sauce";
+	String invalidUser = "user";
+	String invalidPass = "sauce";
+
 	@Before
 	public void setup() {
 		// Create an instance of Chrome for Selenium testing.
-		System.setProperty("webdriver.chrome.driver","/<LOCAL_FILE_PATH_OF_CHROME_DRIVE>/chromedriver");
+		System.setProperty("webdriver.chrome.driver","/<LOCAL_FILE_PATH>/chromedriver");
 		driver = new ChromeDriver();
-		
 		// Visit the test site.
-		driver.get(test_url);
+		driver.get(testUrl);
 	}
 
 	@Test
 	public void NoUserNoPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
-		
-		// Enter the username.
-		username.sendKeys("");
-		
-		// Enter the password.
-		password.sendKeys("");
-		
-		// Submit the credentials.
-		login.click();
+		driver.findElement(By.id("user-name")).sendKeys("");
+		driver.findElement(By.id("password")).sendKeys("");
+		driver.findElement(By.id("login-button")).click();
+				
+		assertFalse(driver.getCurrentUrl() == urlString);
 	}
 	
 	@Test
 	public void InvalidUserNoPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
-		
-		// Enter the username.
-		username.sendKeys(invalid_user);
-		
-		// Enter the password.
-		password.sendKeys("");
-		
-		// Submit the credentials.
-		login.click();
+		driver.findElement(By.id("user-name")).sendKeys(invalidUser);
+		driver.findElement(By.id("password")).sendKeys("");
+		driver.findElement(By.id("login-button")).click();
+				
+		assertFalse(driver.getCurrentUrl() == urlString);		
 	}
 	
 	@Test
 	public void InvalidUserInvalidPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
-		
-		// Enter the username.
-		username.sendKeys(invalid_user);
-		
-		// Enter the password.
-		password.sendKeys(invalid_pass);
-		
-		// Submit the credentials.
-		login.click();
+		driver.findElement(By.id("user-name")).sendKeys(invalidUser);
+		driver.findElement(By.id("password")).sendKeys(invalidPass);
+		driver.findElement(By.id("login-button")).click();
+				
+		assertFalse(driver.getCurrentUrl() == urlString);
 	}
 	
 	@Test
 	public void ValidUserNoPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
-		
-		// Enter the username.
-		username.sendKeys(valid_user);
-		
-		// Enter the password.
-		password.sendKeys("");
-		
-		// Submit the credentials.
-		login.click();
+		driver.findElement(By.id("user-name")).sendKeys(validUser);
+		driver.findElement(By.id("password")).sendKeys("");
+		driver.findElement(By.id("login-button")).click();
+				
+		assertFalse(driver.getCurrentUrl() == urlString);
 	}
 	
 	@Test
 	public void ValidUserInvalidPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
-		
-		// Enter the username.
-		username.sendKeys(valid_user);
-		
-		// Enter the password.
-		password.sendKeys(invalid_pass);
-		
-		// Submit the credentials.
-		login.click();
+		driver.findElement(By.id("user-name")).sendKeys(validUser);
+		driver.findElement(By.id("password")).sendKeys(invalidPass);
+		driver.findElement(By.id("login-button")).click();
+
+		assertFalse(driver.getCurrentUrl() == urlString);
 	}
 	
 	@Test
-	public void ValidUserValidPass() {
-		WebElement username = driver.findElement(By.id("user-name"));
-		WebElement password = driver.findElement(By.id("password"));
-		WebElement login = driver.findElement(By.id("login-button"));
+	public void ValidUserValidPass() throws InterruptedException {
+		driver.findElement(By.id("user-name")).sendKeys(validUser);
+		driver.findElement(By.id("password")).sendKeys(validPass);
+		driver.findElement(By.id("login-button")).click();
 		
-		// Enter the username.
-		username.sendKeys(valid_user);
+		// 5-second delay.
+		TimeUnit.SECONDS.sleep(5);
 		
-		// Enter the password.
-		password.sendKeys(valid_pass);
-		
-		// Submit the credentials.
-		login.click();
+		assertTrue(driver.getCurrentUrl() == urlString);
+		System.out.println(driver.getCurrentUrl());
 	}
 	
 	@After
