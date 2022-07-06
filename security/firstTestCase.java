@@ -2,6 +2,7 @@ package saucedemopackage;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,6 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -44,8 +46,10 @@ public class FirstTestCase {
 		driver.findElement(By.id("user-name")).sendKeys("");
 		driver.findElement(By.id("password")).sendKeys("");
 		driver.findElement(By.id("login-button")).click();
-				
-		assertFalse(driver.getCurrentUrl() == urlString);
+		
+		// verifies the existence of the menu button.
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertFalse(menuButton.size() > 0);
 	}
 	
 	@Test
@@ -54,7 +58,8 @@ public class FirstTestCase {
 		driver.findElement(By.id("password")).sendKeys("");
 		driver.findElement(By.id("login-button")).click();
 				
-		assertFalse(driver.getCurrentUrl() == urlString);		
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertFalse(menuButton.size() > 0);
 	}
 	
 	@Test
@@ -63,7 +68,8 @@ public class FirstTestCase {
 		driver.findElement(By.id("password")).sendKeys(invalidPass);
 		driver.findElement(By.id("login-button")).click();
 				
-		assertFalse(driver.getCurrentUrl() == urlString);
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertFalse(menuButton.size() > 0);
 	}
 	
 	@Test
@@ -72,7 +78,8 @@ public class FirstTestCase {
 		driver.findElement(By.id("password")).sendKeys("");
 		driver.findElement(By.id("login-button")).click();
 				
-		assertFalse(driver.getCurrentUrl() == urlString);
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertFalse(menuButton.size() > 0);
 	}
 	
 	@Test
@@ -81,7 +88,8 @@ public class FirstTestCase {
 		driver.findElement(By.id("password")).sendKeys(invalidPass);
 		driver.findElement(By.id("login-button")).click();
 
-		assertFalse(driver.getCurrentUrl() == urlString);
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertFalse(menuButton.size() > 0);
 	}
 	
 	@Test
@@ -93,8 +101,8 @@ public class FirstTestCase {
 		// 5-second delay.
 		TimeUnit.SECONDS.sleep(5);
 		
-		assertTrue(driver.getCurrentUrl() == urlString);
-		System.out.println(driver.getCurrentUrl());
+		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
+		assertTrue(menuButton.size() > 0);
 	}
 	
 	@After
