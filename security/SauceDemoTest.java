@@ -31,7 +31,7 @@ public class SauceDemoTest {
 	
 	@BeforeEach
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver","/Users/iyana/Downloads/chromedriver");
+		System.setProperty("webdriver.chrome.driver","/<LOCAL_FILEPATH>/chromedriver");
 		driver = new ChromeDriver();
 		driver.get(testUrl);
 	}
@@ -103,7 +103,7 @@ public class SauceDemoTest {
 	public void teardown() throws IOException {
 		// Take a screenshot.
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(scrFile, new File("/Users/iyana/Downloads/test_screenshot_" + count + ".png"));
+		FileUtils.copyFile(scrFile, new File("/<LOCAL_FILEPATH>/test_screenshot_" + count + ".png"));
 		count++;
 		driver.quit();
 	}
