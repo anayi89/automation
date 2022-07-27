@@ -1,29 +1,25 @@
-package saucedemopackage;
-
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+package com.itgarry.saucedemo.firstTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FirstTestCase {
-	WebDriver driver = null;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SauceDemoTest {
+	ChromeDriver driver = null;
 
 	String testUrl = "https://www.saucedemo.com";
 	String urlString = "https://www.saucedemo.com/inventory.html";
@@ -31,23 +27,21 @@ public class FirstTestCase {
 	String validPass = "secret_sauce";
 	String invalidUser = "user";
 	String invalidPass = "sauce";
-
-	@Before
+	Integer count = 0;
+	
+	@BeforeEach
 	public void setup() {
-		// Create an instance of Chrome for Selenium testing.
-		System.setProperty("webdriver.chrome.driver","/<LOCAL_FILE_PATH>/chromedriver");
+		System.setProperty("webdriver.chrome.driver","/Users/iyana/Downloads/chromedriver");
 		driver = new ChromeDriver();
-		// Visit the test site.
 		driver.get(testUrl);
 	}
-
+	
 	@Test
 	public void NoUserNoPass() {
 		driver.findElement(By.id("user-name")).sendKeys("");
 		driver.findElement(By.id("password")).sendKeys("");
 		driver.findElement(By.id("login-button")).click();
 		
-		// verifies the existence of the menu button.
 		List<WebElement> menuButton = driver.findElements(By.xpath("//*[@id=\"react-burger-menu-btn\"]"));
 		assertFalse(menuButton.size() > 0);
 	}
@@ -105,13 +99,12 @@ public class FirstTestCase {
 		assertTrue(menuButton.size() > 0);
 	}
 	
-	@After
+	@AfterEach
 	public void teardown() throws IOException {
 		// Take a screenshot.
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(scrFile, new File("/<LOCAL_FILE_PATH>/test_screenshot.png"));
-				
-		// Quit Chrome.
+		FileUtils.copyFile(scrFile, new File("/Users/iyana/Downloads/test_screenshot_" + count + ".png"));
+		count++;
 		driver.quit();
-	}	
+	}
 }
